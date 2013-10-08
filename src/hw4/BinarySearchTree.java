@@ -67,6 +67,20 @@ public class BinarySearchTree<E extends Comparable<E>> implements Iterable<E>
 
 	private BSTNode<E> root;
 
+        public BSTSet<E> union(BSTSet<E> s)
+        {
+            Iterator<E> iterator1 = this.iterator();
+            Iterator<E> iterator2 = s.iterator();
+            BSTSet<E> unionSet = new BSTSet<>();
+            
+            while (iterator1.hasNext())
+                unionSet.add(iterator1.next());
+            while (iterator2.hasNext())
+                unionSet.add(iterator2.next());
+            
+            return unionSet;
+        }
+        
 	// Returns an iterator over the BST (required for the class to implement Iterable)
 	public Iterator<E> iterator()
 	{
