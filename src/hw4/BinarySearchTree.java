@@ -81,6 +81,21 @@ public class BinarySearchTree<E extends Comparable<E>> implements Iterable<E>
             return unionSet;
         }
         
+        public BSTSet<E> intersection(BSTSet<E> s) 
+        {
+            Iterator<E> iterator1 = this.iterator();
+            //Iterator<E> iterator2 = s.iterator();
+            BSTSet<E> intersectionSet = new BSTSet<>();
+            
+            while (iterator1.hasNext()) {
+                E element = iterator1.next();
+                if (s.contains(element))
+                    intersectionSet.add(element);
+            }
+            
+            return intersectionSet;
+        }
+        
 	// Returns an iterator over the BST (required for the class to implement Iterable)
 	public Iterator<E> iterator()
 	{
