@@ -31,6 +31,46 @@ public class BSTSet<E extends Comparable<E>>
 	{
 		return (data.find(someItem) != null);
 	}
+        
+        public BSTSet<E> union(BSTSet<E> s)
+        {
+            Iterator<E> iterator1 = this.iterator();
+            Iterator<E> iterator2 = s.iterator();
+            BSTSet<E> unionSet = new BSTSet<>();
+            
+            while (iterator1.hasNext())
+                unionSet.add(iterator1.next());
+            while (iterator2.hasNext())
+                unionSet.add(iterator2.next());
+            
+            return unionSet;
+        }
+        
+        public BSTSet<E> intersection(BSTSet<E> s) 
+        {
+            Iterator<E> iterator = this.iterator();
+            //Iterator<E> iterator2 = s.iterator();
+            BSTSet<E> intersectionSet = new BSTSet<>();
+            
+            while (iterator.hasNext()) {
+                E element = iterator.next();
+                if (s.contains(element))
+                    intersectionSet.add(element);
+            }
+            
+            return intersectionSet;
+        }
+        
+        public boolean subsetOf(BSTSet<E> s)
+        {
+            Iterator<E> iterator = this.iterator();
+            
+            while (iterator.hasNext()) {
+                if (!s.contains(iterator.next()))
+                    return false;
+            }
+            return true;
+        }
 
 	// Returns an iterator over the set elements (this will be an in-order
 	//  iterator, since that's how we wrote the iterator() method in BST).
