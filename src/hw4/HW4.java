@@ -14,6 +14,9 @@ public class HW4 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        System.out.println("Testing the BSTSet class....\n");
+        testSet();
+        System.out.println("\n\n\nTesting the HashMapChained rehash....\n");
         testHashMapChainedRehash();
     }
     
@@ -78,23 +81,23 @@ public class HW4 {
 	tmnt.add(18, "Krang");
 	tmnt.add(18, "Krang2");
 	System.out.println(tmnt);
-	//System.out.println(tmnt.get(18));
-	//tmnt.remove(18);
+	System.out.println(tmnt.get(18));
+	tmnt.remove(18);
 	System.out.println(tmnt);
-	//System.out.println(tmnt.get(18));
-	//tmnt.remove(90);
-	//tmnt.remove(29);
+	System.out.println(tmnt.get(18));
+	tmnt.remove(90);
+	tmnt.remove(29);
 	tmnt.add(23, "Bebop");
 	tmnt.add(73, "Technodrome");
 	tmnt.add(29, "Foot Soldier");
 	tmnt.add(32, "Baxter Stockman");
 		
 	System.out.println(tmnt);
-	/*	
+		
 	System.out.println(tmnt.get(13));
 	System.out.println(tmnt.get(18));
 	System.out.println(tmnt.get(23));
 	System.out.println(tmnt.get(24));
-        * */
+        
     }
 }
