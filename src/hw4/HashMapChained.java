@@ -13,6 +13,7 @@ import java.util.LinkedList;
 public class HashMapChained<K, V> implements Map<K, V>
 {
     private LinkedList<Entry<K, V>>[] data = new LinkedList[5];
+    private int size = 0;           //number of entries in the table
 
     public HashMapChained()
     {
@@ -24,8 +25,16 @@ public class HashMapChained<K, V> implements Map<K, V>
     {
         int index = hash(key);
         // ensure the list doesn't already contain the key we're trying to add
-        if (!data[index].contains(new Entry<K, V>(key, null)))
-            data[index].add(new Entry<K, V>(key, value));
+        if (data[index].contains(new Entry<K, V>(key, null)))
+            return;
+        
+        //add the new entry to the table
+        data[index].add(new Entry<K, V>(key, value));
+        size++;
+        
+        //rehash the table if necessary
+        if ((double)size/data.length >= 0.75)
+            rehash();
     }
 
     public V get(K key)
@@ -46,15 +55,26 @@ public class HashMapChained<K, V> implements Map<K, V>
 
         // find the key in the list
         int listIndex = data[index].indexOf(new Entry<K, V>(key, null));
-        if (listIndex != -1)
+        if (listIndex != -1) {
             data[index].remove(listIndex);
+            size--;
+        }
     }
 
     public String toString()
     {
         String r = "";
+        /*
+        for( LinkedList<Entry<K, V>> entryList : data) {
+            for ( Entry<K, V> entry : entryList ) {
+                r += entry + "\n";
+            }
+        }
+        * */
+        
         for (int i = 0; i < data.length; i++)
             r += i + " - " + data[i] + "\n";
+            
         return r;
     }
 
@@ -70,30 +90,25 @@ public class HashMapChained<K, V> implements Map<K, V>
         return hash;
     }
 	
+    private void rehash()
+    {
+        //reference to the old table
+        LinkedList<Entry<K, V>>[] oldData = data;
+        // create a new, larger table
+        data = new LinkedList[2*data.length + 1];
+        for (int i = 0; i < data.length; i++)
+            data[i] = new LinkedList<>();
+        size = 0;
+        
+        for( LinkedList<Entry<K, V>> entryList : oldData) {
+            for ( Entry<K, V> entry : entryList)
+                add(entry.getKey(), entry.getValue());
+        }
+        
+    }
+    
     public static void main(String[] args)
     {
-	Map<Integer, String> tmnt = new HashMapChained<>();
-	tmnt.add(13, "Shredder");
-	tmnt.add(90, "Rocksteady");
-	tmnt.add(18, "Krang");
-	tmnt.add(18, "Krang2");
-	System.out.println(tmnt);
-	System.out.println(tmnt.get(18));
-	tmnt.remove(18);
-	System.out.println(tmnt);
-	System.out.println(tmnt.get(18));
-	tmnt.remove(90);
-	tmnt.remove(29);
-	tmnt.add(23, "Bebop");
-	tmnt.add(73, "Technodrome");
-	tmnt.add(29, "Foot Soldier");
-	tmnt.add(32, "Baxter Stockman");
-		
-	System.out.println(tmnt);
-		
-	System.out.println(tmnt.get(13));
-	System.out.println(tmnt.get(18));
-	System.out.println(tmnt.get(23));
-	System.out.println(tmnt.get(24));
+	
     }	
 }

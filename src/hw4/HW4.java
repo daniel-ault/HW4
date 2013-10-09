@@ -14,6 +14,10 @@ public class HW4 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        testHashMapChainedRehash();
+    }
+    
+    public static void testSet() {
         BSTSet<Integer> set1 = new BSTSet<>();
         BSTSet<Integer> set2 = new BSTSet<>();
         BSTSet<Integer> set3 = new BSTSet<>();
@@ -65,6 +69,32 @@ public class HW4 {
         //6 is not subset of 5
         
         System.out.println("Is set 6 a subset of set 5? " + set6.subsetOf(set5));
-                 
+    }
+    
+    public static void testHashMapChainedRehash() {
+        Map<Integer, String> tmnt = new HashMapChained<>();
+	tmnt.add(13, "Shredder");
+	tmnt.add(90, "Rocksteady");
+	tmnt.add(18, "Krang");
+	tmnt.add(18, "Krang2");
+	System.out.println(tmnt);
+	//System.out.println(tmnt.get(18));
+	//tmnt.remove(18);
+	System.out.println(tmnt);
+	//System.out.println(tmnt.get(18));
+	//tmnt.remove(90);
+	//tmnt.remove(29);
+	tmnt.add(23, "Bebop");
+	tmnt.add(73, "Technodrome");
+	tmnt.add(29, "Foot Soldier");
+	tmnt.add(32, "Baxter Stockman");
+		
+	System.out.println(tmnt);
+	/*	
+	System.out.println(tmnt.get(13));
+	System.out.println(tmnt.get(18));
+	System.out.println(tmnt.get(23));
+	System.out.println(tmnt.get(24));
+        * */
     }
 }
